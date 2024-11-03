@@ -1,0 +1,16 @@
+# dune exec ./src/main.exe
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/calebchiang/.cache/dune/db
+# Workspace root: /Users/calebchiang/Desktop/dream_website
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /Users/calebchiang/.opam/default/bin/ocamlc.opt -config > /var/folders/mc/m0xy52mn7533t_4pqj0q8lgw0000gn/T/dune_bac76a_output
