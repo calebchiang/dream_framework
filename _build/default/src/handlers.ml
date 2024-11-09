@@ -1,18 +1,20 @@
 (* Function to include a sidebar and wrap content *)
 let layout content =
   Dream.html
-    ("<div style='display: flex;'>
-        <nav style='width: 200px; padding: 1rem; background-color: #f4f4f4;'>
-          <ul style='list-style: none; padding: 0;'>
+    ("<link rel='stylesheet' href='/static/styles.css'>
+      <div class='container'>
+        <nav class='sidebar'>
+          <ul>
             <li><a href='/'>Home</a></li>
             <li><a href='/introduction'>Introduction</a></li>
-            <!-- Add more links for other topics as needed -->
+            <!-- Add more links as needed -->
           </ul>
         </nav>
-        <div style='flex: 1; padding: 1rem;'>
+        <main class='content'>
           " ^ content ^ "
-        </div>
+        </main>
       </div>")
+
 
 (* Function for the homepage content *)
 let home_page _ =
