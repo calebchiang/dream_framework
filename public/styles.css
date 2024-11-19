@@ -1,35 +1,79 @@
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    display: flex;
-  }
-  
-  .sidebar {
-    width: 200px;
-    padding: 1rem;
-    background-color: #f4f4f4;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin: 0.5rem 0;
-  }
-  
-  .sidebar a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 1rem;
-  }
-  
+/* General page styles */
+html, body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #292F36;
+  color: #ffffff;
+}
+
+/* Container styles */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 200px;
+  padding: 1rem;
+  background-color: #292F36;
+  box-sizing: border-box;
+  border-right: 1px solid #1A1A1A;
+}
+
+/* Sidebar list styling */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 0.5rem 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+  color: #4d4d4d;
+}
+
+/* Content styles */
+.content {
+  flex: 1;
+  padding: 1rem;
+  background-color: #292F36;
+  box-sizing: border-box;
+}
+
+/* Image styles */
+.dune_dream_install_img,
+.create_project_img,
+.create_files_img,
+.dune_project_config_img,
+.dune_config_img {
+  width: 200px;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+}
+
+/* Headings styles */
+h1, h2 {
+  color: #00BFFF;
+}
+
+/* Links within the content */
+.content a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.content a:hover {
+  color: #4d4d4d;
+}
