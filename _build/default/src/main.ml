@@ -14,3 +14,4 @@ let () =
     Dream.get "/static/**" (Dream.static "public"); 
     Dream.any "/" (fun _ -> Dream.empty `Not_Found)
   ]
+

@@ -63,6 +63,23 @@ html, body {
   border: 1px solid #ffffff;
 }
 
+.web_frameworks_img {
+  width:600px;
+  height: auto;
+  border-radius: 5px;
+  border: 1px soild #ffffff;
+  margin-top: 20px;
+ 
+}
+
+.imperative_img,
+.functional_img {
+  width: 530px;
+  height: auto;
+  border-radius: 5px;
+  vertical-align: top; 
+}
+
 /* Headings styles */
 h1, h2 {
   color: #00BFFF;
@@ -75,5 +92,51 @@ h1, h2 {
 }
 
 .content a:hover {
+  color: #4d4d4d;
+}
+/* Table container styling */
+.imperative-vs-functional-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #1A1A1A;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table header styling */
+.imperative-vs-functional-table thead tr {
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 1px solid #4d4d4d; 
+}
+
+/* Table rows styling */
+.imperative-vs-functional-table tbody tr {
+  border-bottom: 1px solid #4d4d4d; /* Subtle row divider */
+}
+
+
+/* Table cell styling */
+.imperative-vs-functional-table th,
+.imperative-vs-functional-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+/* Align the table content */
+.imperative-vs-functional-table td {
+  vertical-align: top;
+}
+
+/* Optional: Table links styling */
+.imperative-vs-functional-table a {
+  color: #00BFFF;
+  text-decoration: none;
+}
+
+.imperative-vs-functional-table a:hover {
   color: #4d4d4d;
 }

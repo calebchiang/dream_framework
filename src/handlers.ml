@@ -35,22 +35,69 @@ let home_page _ =
   Dream.html
     (layout "<h1> Welcome to the Dream Framework</h1>
              <p> Dream is a simple, type-safe web framework for OCaml. </p>
-             ")
-
-(** Function for the introduction page content *)
-let introduction_page _ = 
-  Dream.html
-    (layout "<h1> Introduction </h1> 
-             <p> Here is an introduction to the Dream framework. </p>
-             
              <h2> Dream Offers: </h2> 
              <li> Functional Web Development </li> 
              <li> Middleware and Routes </li> 
              <li> HTML Templates </li> 
              <li> Error Handling </li> 
              <li> Simple Deployment Instructions </li> 
+             ")
 
-             <h2> Types </h2> 
+(** Function for the introduction page content *)
+let introduction_page _ = 
+  Dream.html
+    (layout "<h1> Introduction </h1> 
+             <h3> What is a Web Framework? </h4>
+        
+             <p> A web framework is a set of tools and code that helps developers build websites or web applications. </p>
+             <li> Routing: Deciding what content to show when a user visits a specific URL. </li>
+             <li> Handling HTTP Requests and Responses: Managing communication between web browser and server. </li>
+             <li> Middleware: Functionality to requests and responses, like authentication. </li>
+             <li> Database Interactions: Connect and query to a database </li>
+
+             <p> Most programming languages have their own web frameworks: </p>
+             <li> Python: Django </li>
+             <li> JavaScript: Express (Node.js) </li>
+             <li> OCaml: Dream, Opium </li>
+             <img class='web_frameworks_img' src='/static/images/web_frameworks.png' alt='webframework'>
+            
+             <h3> Functional Web Development and the Dream Framework</h4>
+             <p> Functional web frameworks differ from imperative focused languages in several key ways: </p>
+             <h4> 1.) Immutability and Statelessness </h4>
+             <p> Request and Response Handling: </p>
+             <li> Each HTTP request and response is treated as an independent piece of data </li>
+             <li> With Dream, requests and responses are not modified. Instead, handlers process the input (request) and produce new output (response) </p>
+
+             <img class='imperative_img' src='/static/images/imperative_code.png' alt='imperativecode'>
+             <img class='functional_img' src='/static/images/functional_code.png' alt='functionalcode'>
+             
+             <table class='imperative-vs-functional-table'>
+               <thead>
+                 <tr>
+                   <th></th>
+                   <th>Express</th>
+                   <th>Dream</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>Response Mutability</td>
+                   <td>The res object is modified directly, changing its state in place </td>
+                   <td>The response object is immutable; each change creates a new one</td>
+                 </tr>
+                 <tr>
+                   <td>Side Effects</td>
+                   <td>If middleware modifies res, it can accidentally affect the response</td>
+                   <td>Each function operates independently without altering shared state</td>
+                 </tr>
+                 <tr>
+                   <td>Concurrent Safety</td>
+                   <td>Shared mutable res requires careful handling in multi-threaded apps</td>
+                   <td>Immutable objects are naturally safe for concurrent environements</td>
+                 </tr>
+               </tbody>
+             </table>
+            
              ")
 
 
@@ -101,3 +148,10 @@ let templating_and_html_rendering_page _ =
     (layout "<h1> Templating and HTML Rendering </h1>
              <p> Overview of how to render HTML in Dream using Dream.html, and options for
                  integrating templating engines. ")
+
+
+
+
+
+
+

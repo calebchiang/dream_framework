@@ -1,0 +1,22 @@
+
+
+
+
+
+opam install dune
+opam install dream
+
+
+
+mkdir dream_project
+cd dream_project
+
+
+
+mkdir src
+touch src/main.ml
+touch src/dune
+touch dune-project
+
+
+
