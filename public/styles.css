@@ -8,6 +8,10 @@ html, body {
   color: #ffffff;
 }
 
+p, li {
+  margin-bottom: 1rem; /* Adds space below each paragraph or list item */
+}
+
 /* Container styles */
 .container {
   display: flex;
@@ -73,16 +77,36 @@ html, body {
 }
 
 .imperative_img,
-.functional_img {
+.functional_img,
+.javascript_type_img,
+.ocaml_type_img,
+.javascript_concurrency_img,
+.ocaml_concurrency_img {
   width: 530px;
   height: auto;
   border-radius: 5px;
   vertical-align: top; 
 }
 
+.javascript_type_img,
+.ocaml_type_img,
+.ocaml_concurrency_img {
+  margin-bottom: 16px;
+}
+
+.ocaml_type_img,
+.javascript_concurrency_img {
+  margin-top: 16px;
+}
+
+
 /* Headings styles */
-h1, h2 {
+h1 {
   color: #00BFFF;
+}
+
+h1, h2 {
+  margin-bottom: 30px;
 }
 
 /* Links within the content */

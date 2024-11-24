@@ -1,15 +1,19 @@
 
 
 
-const express = require('express');
-const app = express();
+
 
 app.get('/', (req, res) => {
-  // Modify the response object in place
-  res.set('Content-Type', 'text/plain');
-  res.set('X-Custom-Header', 'Example');
-  res.send('Hello, world!');
+  // Accessing a parameter from the query string
+  const name = req.query.name;
+
+  // Assuming 'name' is a string (no type checks)
+  res.send(`Hello, ${name}!`);
 });
+
+
+
+
 
 
 

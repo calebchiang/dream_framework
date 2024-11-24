@@ -47,7 +47,7 @@ let home_page _ =
 let introduction_page _ = 
   Dream.html
     (layout "<h1> Introduction </h1> 
-             <h3> What is a Web Framework? </h4>
+             <h2> What is a Web Framework? </h2>
         
              <p> A web framework is a set of tools and code that helps developers build websites or web applications. </p>
              <li> Routing: Deciding what content to show when a user visits a specific URL. </li>
@@ -61,9 +61,9 @@ let introduction_page _ =
              <li> OCaml: Dream, Opium </li>
              <img class='web_frameworks_img' src='/static/images/web_frameworks.png' alt='webframework'>
             
-             <h3> Functional Web Development and the Dream Framework</h4>
+             <h2> Functional Web Development and the Dream Framework</h2>
              <p> Functional web frameworks differ from imperative focused languages in several key ways: </p>
-             <h4> 1.) Immutability and Statelessness </h4>
+             <h3> 1.) Immutability and Statelessness </h3>
              <p> Request and Response Handling: </p>
              <li> Each HTTP request and response is treated as an independent piece of data </li>
              <li> With Dream, requests and responses are not modified. Instead, handlers process the input (request) and produce new output (response) </p>
@@ -97,8 +97,46 @@ let introduction_page _ =
                  </tr>
                </tbody>
              </table>
+
+            <h3> 2.) Strong Type Systems </h3>
+            <p> One of the core features of OCaml is their strong type systems:
+            <li> Types are enforced at compile time </li>
+            <li> Catches errors in the code before it runs </li>
+            <p> In contrast, languages like JavaScript uses a weak and dynamic type system making it easier to write code that is error-prone: </p>
+            <img class='javascript_type_img' src='/static/images/javascript_type.png' alt='javascripttype'>
+            <li> The req.query.name field is assumed to be a string </li>
+            <li> There is no guarantee that name exists or is of the correct type </li>
+
+            <img class='ocaml_type_img' src='/static/images/ocaml_type.png' alt='ocamltype'>
+            <li> The Dream.query function returns an option type (Some name if the query parameter exists, or None) </li>
+            <li> If you forget to handle None case, the code won't compile </li>
+            <li> No risk of runtime errors </li>
+
+            <h3> 3.) Function Composition </h3>
+            <p> Middleware and handlers are treated as functions that take inputs and returns outputs, without modifying anything in place. Functions can be combined declaretively using the @@ operator forming a clear and predicable pipeline. </p>
+            <p> Why Function Composition Matters in Dream: </p>
+            <li> Modularity: Functions are independent, making them reusable </li>
+            <li> Clarity: Composition creates a clear, declarative flow of operations </li>
+            <li> Debugging: Each function is predicable, making debugging simpler </li>
+
+            <h3> 4.) Concurrency and Asynchronous Programming </h3>
+            <p> In imperative frameworks: </p>
+            <li> Shared State: Mutable state is often shared between concurrent operations </li>
+            <li> Manual Control: Developers manage concurrency explicitely using callbacks or promises </li>
+            <li> Error-Prone: Shared state and manual synchronization can lead to deadlocks or bugs </li>
+            <img class='javascript_concurrency_img' src='/static/images/javascript_concurrency.png' alt='javascriptconcurrency'>
+
+            <h4> Concurrency in Dream </h4>
+            <p> Concurrency in Dream is based on Ocaml's Lwt library, which provides lightweight threads for asynchronous programming <p>
+            <p> Lwt threads allow Dream to manage tasks concurrently, such as: </p>
+            <li> Asynchronous Operations: Tasks like reading from a database, handling file I/O, or waiting for network responses are non blocking. 
+            While one task is waiting, the server can process other requests. </li>
             
-             ")
+            <p> You can compose tasks with Lwt.join or Lwt.bind: </p>
+            <img class='ocaml_concurrency_img' src='/static/images/ocaml_concurrency.png' alt='ocamlconcurrency'>
+            ")
+
+            
 
 
 (** Function for the installation and setup page content *)
@@ -120,7 +158,6 @@ let installation_and_setup_page _ =
              <h4> Step 3: Configure the Project </h4>
              <p> dune-project file (at project root): </p>
              <img class='dune_project_config_img' src='static/images/dune_project_config.png' alt='duneprojectconfig'>
-
              <p> dune file in src directory: </p>
              <img class='dune_config_img' src='/static/images/dune_config.png' alt='duneconfig'>
 
@@ -148,6 +185,14 @@ let templating_and_html_rendering_page _ =
     (layout "<h1> Templating and HTML Rendering </h1>
              <p> Overview of how to render HTML in Dream using Dream.html, and options for
                  integrating templating engines. ")
+
+
+
+
+
+
+
+
 
 
 
