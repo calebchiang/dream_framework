@@ -167,8 +167,63 @@ let installation_and_setup_page _ =
 let middleware_page _ = 
   Dream.html
     (layout "<h1> Middleware </h1>
-             <p> Details the concepts of middleware in Dream and how it can be used for logging,
-                 authentication, and request handling. ")
+             <h2> Middleware in Dream</h2>
+             <p> Middleware is a function that wraps around your application's request handling pipeline. It intercepts requests and responses to perform specific tasks </p>
+             <p> Examples of this could include: </p>
+             <li> Logging </li>
+             <li> Authentication </li>
+             <li> Error handling </li>
+             <li> Cross-origin Resource Sharing (CORS) </li>
+             <h2> Key Features of Middleware in Dream </h2>
+             <h3> Composability: Middleware functions are composed using the @@ operator, allowing you to chain multiple layers of functions </h3>
+             <p> e.g. Basic Logging Middleware: </p>
+             <img class='middleware_img' src='static/images/middleware.png' alt='middleware'>
+             <p> Terminal Output: </p>
+             <img class='middleware_output_img' src='static/images/middleware_output.png' alt='middlewareoutput'>
+             <li> The log_request function intercepts every incoming HTTP request </li>
+             <li> It logs the message to the terminal </li>
+             <li> After logging, it calls the next handler in the pipeline (handler request) </li>
+
+             <h3> Dream.scope </h3>
+             <p> Dream.scope groups routes under a common prefix (e.g. /api or /admin) and allows middleware to be applied specifically to those routes </p>
+             <p> Example grouping routes under a specific path and applies middleware only to those routes: </p>
+             <img class='scoped_img' src='static/images/scoped.png' alt='scoped'>
+             <p> Public Route: </p>
+             <li> Dream.get \"/\" handler_public defines a public route at / </li>
+             <li> This route is accessible without any middleware </li>
+             <li> Visiting / responds with This is a public page. </li>
+             <img class='scoped_public_img' src='static/images/scoped_public.png' alt='scopedpublic'>
+             <p> Scoped Route: </p>
+             <li> Dream.scope groups routes under /scoped </li>
+             <li> Middleware log_requests applies only to routes within this scope </li>
+             <img class='scoped_scoped_img' src='static/images/scoped_scoped.png' alt='scopedscoped'>
+             <p> Terminal Output: </p>
+             <img class='scoped_terminal_img' src='static/images/scoped_terminal.png' alt='scopedterminal'>
+
+             <h2> Benefits of Middleware in Dream </h2>
+             <li> Modularity: Middleware seperates logic from route handlers, keeping code clean and maintainable </li>
+             <li> Composability: Middleware functions allows easy chaining and layering of functionality </li>
+             <li> Scoped Middleware: Middleware can be appied globabally or selectively to specific route groups using Dream.scope </li>
+             <li> Reusabiity: Middleware functions can be reused across multiple parts of the application for consistent behaviour </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             
+             
+             ")
 
 
 (** Function for the routing page content *)
@@ -206,12 +261,9 @@ let routing_page _ =
              <li> The Dream.param function retrieves the value of a named parameter from the URL </li>
              <li> The extracted value is used to create a personalized response. For example, if the URL
               is /hello/John, the handler responds with Hello, John! </li>
+             <img class='hello_john_img' src='/static/images/hello_john.png' alt='hellojohn'>
 
 
-
-
-             
-             
              ")
 
 (** Function for the Templating and HTML Rendering page content *)

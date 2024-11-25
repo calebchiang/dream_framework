@@ -64,7 +64,6 @@ p, li {
   width: 200px;
   height: auto;
   border-radius: 5px;
-  border: 1px solid #ffffff;
 }
 
 .web_frameworks_img {
@@ -84,11 +83,29 @@ p, li {
 .ocaml_concurrency_img,
 .routing_img,
 .handler_functions_img,
-.dynamic_routing_img {
+.dynamic_routing_img,
+.hello_john_img,
+.scoped_img
+ {
   width: 530px;
   height: auto;
   border-radius: 5px;
   vertical-align: top; 
+}
+
+.middleware_img {
+  width: 530px;
+  height: auto;
+  border-radius: 5x;
+}
+
+.middleware_output_img,
+.scoped_public_img,
+.scoped_scoped_img,
+.scoped_terminal_img {
+  width: 250px;
+  border-radius: 5px;
+  height: auto;
 }
 
 .javascript_type_img,
@@ -96,7 +113,9 @@ p, li {
 .ocaml_concurrency_img,
 .routing_img,
 .handler_functions_img,
-.dynamic_routing_img {
+.dynamic_routing_img,
+.middleware_output_img
+ {
   margin-bottom: 16px;
 }
 
