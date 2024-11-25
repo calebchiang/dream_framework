@@ -197,6 +197,17 @@ let routing_page _ =
              <li> Handlers return an Lwt.t containing a Dream.response, which the framework sends back to the client </li>
 
 
+             <h2> Dynamic Routing </h2>
+             <p> Dynamic routing allows your application to handle URL parameters, such as /user/:id where id changes based on requests </p>
+             <li> Dream uses :name syntax in the route to define dynamic parts in the URL </li>
+             <li> You can extract the value of these dynamic segments using Dream.param </li>
+             <img class='dynamic_routing_img' src='/static/images/dynamic_routing.png' alt='dynamicrouting'>
+             <li> The route /hello/:name contains a dynamic segment :name </li>
+             <li> The Dream.param function retrieves the value of a named parameter from the URL </li>
+             <li> The extracted value is used to create a personalized response. For example, if the URL
+              is /hello/John, the handler responds with Hello, John! </li>
+
+
 
 
              

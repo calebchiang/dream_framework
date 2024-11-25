@@ -83,7 +83,8 @@ p, li {
 .javascript_concurrency_img,
 .ocaml_concurrency_img,
 .routing_img,
-.handler_functions_img {
+.handler_functions_img,
+.dynamic_routing_img {
   width: 530px;
   height: auto;
   border-radius: 5px;
@@ -94,7 +95,8 @@ p, li {
 .ocaml_type_img,
 .ocaml_concurrency_img,
 .routing_img,
-.handler_functions_img {
+.handler_functions_img,
+.dynamic_routing_img {
   margin-bottom: 16px;
 }
 
