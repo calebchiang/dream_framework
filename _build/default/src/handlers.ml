@@ -73,9 +73,18 @@ let introduction_page _ =
              <li> Each HTTP request and response is treated as an independent piece of data </li>
              <li> With Dream, requests and responses are not modified. Instead, handlers process the input (request) and produce new output (response) </p>
 
+             <p> JavaScript Example: </p>
              <img class='imperative_img' src='/static/images/imperative_code.png' alt='imperativecode'>
+
+             <p> Dream Example: </p>
              <img class='functional_img' src='/static/images/functional_code.png' alt='functionalcode'>
              
+             <p> In JavaScript, the res object is mutable </p>
+             <li> Methods like res.set() directly modify the state of the res object </li>
+
+             <p> Whereas, the dream framework in OCaml emphasizes immutability </p>
+             <li> Dream.response creates a response, and Dream.set_header returns a new response object with updated headers </li>
+             <li> Each transformation produces a new state, which must be explicately returned </li>
              <table class='imperative-vs-functional-table'>
                <thead>
                  <tr>
@@ -113,10 +122,11 @@ let introduction_page _ =
             <li> There is no guarantee that name exists or is of the correct type </li>
 
             <img class='ocaml_type_img' src='/static/images/ocaml_type.png' alt='ocamltype'>
+            <li> Dream.query is a function used to extract query parameters from the URL of an HTTP request </li>
             <li> The Dream.query function returns an option type (Some name if the query parameter exists, or None) </li>
+            <li> The pattern matching enforces handling of both cases and prevents potential runtime errors from unhandled cases </li>
             <li> If you forget to handle None case, the code won't compile </li>
-            <li> No risk of runtime errors </li>
-
+        
             <h3> 3.) Function Composition </h3>
             <p> Middleware and handlers are treated as functions that take inputs and returns outputs, without modifying anything in place. Functions can be combined declaretively using the @@ operator forming a clear and predicable pipeline. </p>
             <p> Why Function Composition Matters in Dream: </p>
@@ -130,6 +140,10 @@ let introduction_page _ =
             <li> Manual Control: Developers manage concurrency explicitely using callbacks or promises </li>
             <li> Error-Prone: Shared state and manual synchronization can lead to deadlocks or bugs </li>
             <img class='javascript_concurrency_img' src='/static/images/javascript_concurrency.png' alt='javascriptconcurrency'>
+            <p> Potential Issues with this Code: </p>
+            <li> sharedCounter is a mutable shared state, and both incrementCounter() calls modify it asynchronously </li>
+            <li> Modifying the shared state in an async callback can lead to unexpected results </li>
+            <li> If another piece of code also modifies sharedCounter, could create unpredictable behaviour </li>
 
             <p> Concurrency in Dream is based on Ocaml's Lwt library, which provides lightweight threads for asynchronous programming <p>
             <p> Lwt threads allow Dream to manage tasks concurrently, such as: </p>
@@ -141,9 +155,9 @@ let introduction_page _ =
             <p> Dream routes are asynchronous functions, so Lwt is used to handle tasks like reading a database or processing a file upload </p>
             <img class='lwt_img' src='/static/images/lwt.png' alt='lwt'>
             <p> In the handler function: </p>
-            <li> Lwt_io.printl is used to asynchronously print \"Processing request\" to the console </li>
+            <li> Lwt_io.printl is used to asynchronously print \"Processing request\" to the console. This operation is non-blocking, meaning the server can still handle requests while this operation is waiting to complete. </li>
             <li> It returns a promise representing the asychronous operation </li>
-            <li> The bind operator ( >>= ) is used to chain asynchronous operations. Once the message is printed, it continues to the next operation </li>
+            <li> The bind operator ( >>= ) is used to chain asynchronous operations. This ensures that Dream.respond is executed only after the Lwt_io.printl operation completes.  </li>
             <li> Dream.respond creates a response with the text \"Hello, Dream!\" which is sent back to the client </li>
 
             <p> Execution Flow: </p>
@@ -171,11 +185,13 @@ let introduction_page _ =
             <img class='fetch_user_img' src='/static/images/fetch_user.png' alt='fetchuser'>
             <p> Here, fetch_user_data simulates a non-blocking database query using Lwt_unix.sleep. The handler uses Lwt.bind ( >>= ) 
             to chain the asynchronous computation and send the result back as an HTTP response </p>
+            <li> Lwt_unix.sleep delays execution for 1 second without blocking other tasks </li>
+            
 
             <h3> Summary </h3>
             <li> Lwt provides the foundational asynchronous capabilities for Dream </li>
             <li> Dream uses Lwt to handle HTTP requests and responses without blocking the server </li>
-            <li> Writing Dream applications involve woring directly with Lwt for async logic </li>
+            <li> Writing Dream applications involve working directly with Lwt for async logic </li>
 
 
             
@@ -193,6 +209,8 @@ let installation_and_setup_page _ =
               <h2> Getting Started </h2>
 
              <h4> Step 1: Install Dune and Dream </h4>
+             <li> Dune is a build system for OCaml projects </li>
+             <li> Automate the process of compiling OCaml code, managing dependencies, and generating executables </li>
              <img class='dune_dream_install_img' src='/static/images/dune_dream_install.png' alt='dunedreaminstall'>
 
              <h4> Step 2: Create the Project Structure </h4>
@@ -287,6 +305,11 @@ let routing_page _ =
              <li> Handlers receive a Dream.request object which contains all the data about the incoming HTTP request (e.g. headers, query parameters, and body) </li>
              <li> Handlers return an Lwt.t containing a Dream.response, which the framework sends back to the client </li>
 
+             <p> Important Note: </p>
+             <li> Dream handlers are designed to work asynchronously, each handler must return an Lwt.t type </li>
+             <li> Lwt.return is used here to wrap the value into a Lwt.t type </li>
+             <li> Even if the operation itself is synchronous, each handler must return Lwt.t type to ensure the code is ready for future asychronous behaviour </li>
+
 
              <h2> Dynamic Routing </h2>
              <p> Dynamic routing allows your application to handle URL parameters, such as /user/:id where id changes based on requests </p>
@@ -298,8 +321,6 @@ let routing_page _ =
              <li> The extracted value is used to create a personalized response. For example, if the URL
               is /hello/John, the handler responds with Hello, John! </li>
              <img class='hello_john_img' src='/static/images/hello_john.png' alt='hellojohn'>
-
-
              ")
 
 (** Function for the Templating and HTML Rendering page content *)
