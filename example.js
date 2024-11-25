@@ -3,15 +3,22 @@
 
 
 
-app.get('/', (req, res) => {
-  // Accessing a parameter from the query string
-  const name = req.query.name;
 
-  // Assuming 'name' is a string (no type checks)
-  res.send(`Hello, ${name}!`);
-});
+let sharedCounter = 0; // Shared mutable state
 
+function incrementCounter() {
+  // Simulate an asynchronous operation with a delay
+  setTimeout(() => {
+    sharedCounter += 1; // Modify shared state
+    console.log(`Counter: ${sharedCounter}`);
+  }, 100);
+}
 
+// Start two tasks that modify the shared counter
+incrementCounter();
+incrementCounter();
+
+console.log("Tasks started...");
 
 
 

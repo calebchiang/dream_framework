@@ -171,13 +171,37 @@ let middleware_page _ =
                  authentication, and request handling. ")
 
 
-
 (** Function for the routing page content *)
 let routing_page _ = 
   Dream.html
     (layout "<h1> Routing </h1>
-             <p> How routing works in Dream, including examples of defining routes and handling different
-                 HTTP methods. ")
+             <h2> What is Routing? </h2>
+             <p> Routing determines how a web application responds to a client's request for a specific URL or endpoint. </p>
+             <li> Allows developers to organize application logic </li>
+             <li> Enables creating dynamic websites or multi-page applications </li>
+             <p> Dream uses a declarative style for defining routes: </p>
+             <li> Routes are defined in a router, which maps HTTP methods (GET, POST, etc.) and paths to handler functions </li>
+             <img class='routing_img' src='/static/images/routing.png' alt='routing'>
+             <p> How routing works in Dream: </p>
+             <li> Dream.router maps URL paths to handler functions </li>
+             <li> Dream.get \"/\" handler_home maps the root URL to handler_home </li>
+             <li> Dream.get \"/about\" handler_about maps /about to handler_about </li>
+             <li> Dream.run starts the application and attaches the routing logic </li>
+             <li> The @@ operator composes functions declaratively, passing the router to Dream.run </li>
+
+             <h2> Handler Functions </h2>
+             <p> Handler functions are a fundamental part of a Dream application. They define how the application responds to incoming HTTP requests for specific routes. </p>
+             <p> In the example below: </p>
+             <img class='handler_functions_img' src='/static/images/handler_functions.png' alt='handlerfunctions'>
+             <li> Handlers receive a Dream.request object which contains all the data about the incoming HTTP request (e.g. headers, query parameters, and body) </li>
+             <li> Handlers return an Lwt.t containing a Dream.response, which the framework sends back to the client </li>
+
+
+
+
+             
+             
+             ")
 
 (** Function for the Templating and HTML Rendering page content *)
 let templating_and_html_rendering_page _ =
@@ -185,14 +209,6 @@ let templating_and_html_rendering_page _ =
     (layout "<h1> Templating and HTML Rendering </h1>
              <p> Overview of how to render HTML in Dream using Dream.html, and options for
                  integrating templating engines. ")
-
-
-
-
-
-
-
-
 
 
 
