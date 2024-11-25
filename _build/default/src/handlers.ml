@@ -30,6 +30,9 @@ let layout content =
    </body>
    </html>"
 
+
+
+
 (** Function for the homepage content *)
 let home_page _ =
   Dream.html
@@ -42,6 +45,8 @@ let home_page _ =
              <li> Error Handling </li> 
              <li> Simple Deployment Instructions </li> 
              ")
+
+
 
 (** Function for the introduction page content *)
 let introduction_page _ = 
@@ -119,21 +124,62 @@ let introduction_page _ =
             <li> Clarity: Composition creates a clear, declarative flow of operations </li>
             <li> Debugging: Each function is predicable, making debugging simpler </li>
 
-            <h3> 4.) Concurrency and Asynchronous Programming </h3>
+            <h2> Concurrency in Dream </h2>
             <p> In imperative frameworks: </p>
             <li> Shared State: Mutable state is often shared between concurrent operations </li>
             <li> Manual Control: Developers manage concurrency explicitely using callbacks or promises </li>
             <li> Error-Prone: Shared state and manual synchronization can lead to deadlocks or bugs </li>
             <img class='javascript_concurrency_img' src='/static/images/javascript_concurrency.png' alt='javascriptconcurrency'>
 
-            <h4> Concurrency in Dream </h4>
             <p> Concurrency in Dream is based on Ocaml's Lwt library, which provides lightweight threads for asynchronous programming <p>
             <p> Lwt threads allow Dream to manage tasks concurrently, such as: </p>
             <li> Asynchronous Operations: Tasks like reading from a database, handling file I/O, or waiting for network responses are non blocking. 
             While one task is waiting, the server can process other requests. </li>
+
+            <h3> How Dream Uses Lwt: </h3>
+            <h4> 1.) Asynchronous Request Handling </h4>
+            <p> Dream routes are asynchronous functions, so Lwt is used to handle tasks like reading a database or processing a file upload </p>
+            <img class='lwt_img' src='/static/images/lwt.png' alt='lwt'>
+            <p> In the handler function: </p>
+            <li> Lwt_io.printl is used to asynchronously print \"Processing request\" to the console </li>
+            <li> It returns a promise representing the asychronous operation </li>
+            <li> The bind operator ( >>= ) is used to chain asynchronous operations. Once the message is printed, it continues to the next operation </li>
+            <li> Dream.respond creates a response with the text \"Hello, Dream!\" which is sent back to the client </li>
+
+            <p> Execution Flow: </p>
+            <li> 1.) The program starts the server listening for HTTP requests </li>
+            <li> 2.) When a client sends a get request to /, the server: </li> 
+            <ul>
+            <li> Logs the request using the Dream.logger middleware </li>
+            <li> Routes the request to the handler function </li>
+            </ul>
+            <li> 3.) The handler function: </li>
+            <ul> 
+            <li> Prints \"Processing request\" to the console asynchronously </li>
+            <img class='processing_request_img' src='/static/images/processing_request.png' alt='processingrequest'>
+
+            <li> Responds with \"Hello, Dream!\" to the client </li>
+            <img class='hello_dream_img' src='/static/images/hello_dream.png' alt='hellodream'>
+            </ul>
             
-            <p> You can compose tasks with Lwt.join or Lwt.bind: </p>
-            <img class='ocaml_concurrency_img' src='/static/images/ocaml_concurrency.png' alt='ocamlconcurrency'>
+            <h3> Benefits of Lwt in Dream </h3>
+            <li> You can handle multiple request concurrently without blocking the server </li>
+            <li> Dream abstracts most of the complexities of Lwt and simplifies asynchronous programming </li>
+            <li> Many OCaml libraries for databases or filesystems provide Lwt-compatible API's </li>
+
+            <p> Suppose you want to fetch user data from a database in a Dream handler: </p>
+            <img class='fetch_user_img' src='/static/images/fetch_user.png' alt='fetchuser'>
+            <p> Here, fetch_user_data simulates a non-blocking database query using Lwt_unix.sleep. The handler uses Lwt.bind ( >>= ) 
+            to chain the asynchronous computation and send the result back as an HTTP response </p>
+
+            <h3> Summary </h3>
+            <li> Lwt provides the foundational asynchronous capabilities for Dream </li>
+            <li> Dream uses Lwt to handle HTTP requests and responses without blocking the server </li>
+            <li> Writing Dream applications involve woring directly with Lwt for async logic </li>
+
+
+            
+            
             ")
 
             
@@ -205,24 +251,6 @@ let middleware_page _ =
              <li> Composability: Middleware functions allows easy chaining and layering of functionality </li>
              <li> Scoped Middleware: Middleware can be appied globabally or selectively to specific route groups using Dream.scope </li>
              <li> Reusabiity: Middleware functions can be reused across multiple parts of the application for consistent behaviour </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-             
-             
              ")
 
 
@@ -239,10 +267,18 @@ let routing_page _ =
              <img class='routing_img' src='/static/images/routing.png' alt='routing'>
              <p> How routing works in Dream: </p>
              <li> Dream.router maps URL paths to handler functions </li>
-             <li> Dream.get \"/\" handler_home maps the root URL to handler_home </li>
-             <li> Dream.get \"/about\" handler_about maps /about to handler_about </li>
              <li> Dream.run starts the application and attaches the routing logic </li>
              <li> The @@ operator composes functions declaratively, passing the router to Dream.run </li>
+
+             <h3> Dream.get </h3>
+             <p> A function in the Dream framework that is used to define a route that responds to HTTP GET requests </p>
+             <li> It specifies the path and the corresponding handler function that will proces requests to this path </li>
+             <li> In the above example, Dream.get \"/\" handler_home maps the root URL to handler_home </li>
+             <li> Dream.get \"/about\" handler_about maps /about to handler_about </li>
+
+             <h3> Dream.post </h3>
+             <p> Similiar to Dream.get, but designed to handle HTTP POST requests </p>
+             <li> Typically used for sending data to the server, such as form submissions, API requests, or uploading files </li>
 
              <h2> Handler Functions </h2>
              <p> Handler functions are a fundamental part of a Dream application. They define how the application responds to incoming HTTP requests for specific routes. </p>
@@ -270,8 +306,38 @@ let routing_page _ =
 let templating_and_html_rendering_page _ =
   Dream.html
     (layout "<h1> Templating and HTML Rendering </h1>
-             <p> Overview of how to render HTML in Dream using Dream.html, and options for
-                 integrating templating engines. ")
+             <h2> Templating and HTML Rendering in Dream </h2>
+             <p> Dream provides simple and flexible ways to render HTML responses
+             <li> This includes integrating templating engines or directly generating HTML within handlers </li>
+             <h3> Dream supports HTML rendering directly via Dream.html: </h3>
+             <li> A helper function used to send HTML responses to the client </li>
+             <p> Example: </p>
+             <img class='html_img' src='/static/images/html.png' alt='html'>
+             <li> The HTML content is passed as a string to Dream.html. This string contains static HTML content, including headings, a paragraph, and a list </li>
+             <li> Dream.router will then map the route / to this handler function which will display the home page </li>
+             
+             <h3> Dynamic HTML with String Concatenation </h3>
+             <p> This approach involves embedding variables or application data directly into an HTML string <p>
+             <img class='dynamic_html_img' src='/static/images/dynamic_html.png' alt='dynamichtml'>
+             <li> The title variable contains the page title, and the message variable holds a dynamic message </li>
+             <li> OCaml's ^ operator concatenates the title and message into the final HTML structure </li>
+             <p> Advantages of This Approach: </p>
+             <li> Simplicity: Straightforward and doesn't require additional libraries </li>
+             <li> Flexibility: Quickly generate dynamic pages with data embedded in the HTML </li>
+             <li> Minimal Overhead: Ideal for small applications </li>
+
+             <h3> Templating Engines </h3>
+             <p> A tool used to create dynamic HTML pages by defining a structure of a webpage. This can be a template using a predefined HTML file or placeholders for dynamic content </p>
+             <p> Advantages: </p>
+             <li> Keeps the structure and style of the page seperate from the application logic </li>
+             <li> Templates can include placeholders that are replaced with dynamic data at runtime, such as user names, lists, or API results </li>
+             <li> Templates make HTML easier to read and modify </li>
+  
+
+             
+             
+             
+             ")
 
 
 

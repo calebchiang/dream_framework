@@ -60,7 +60,8 @@ p, li {
 .create_project_img,
 .create_files_img,
 .dune_project_config_img,
-.dune_config_img {
+.dune_config_img
+ {
   width: 200px;
   height: auto;
   border-radius: 5px;
@@ -85,7 +86,11 @@ p, li {
 .handler_functions_img,
 .dynamic_routing_img,
 .hello_john_img,
-.scoped_img
+.scoped_img,
+.html_img,
+.dynamic_html_img,
+.lwt_img,
+.fetch_user_img
  {
   width: 530px;
   height: auto;
@@ -102,7 +107,9 @@ p, li {
 .middleware_output_img,
 .scoped_public_img,
 .scoped_scoped_img,
-.scoped_terminal_img {
+.scoped_terminal_img,
+.processing_request_img,
+.hello_dream_img {
   width: 250px;
   border-radius: 5px;
   height: auto;
@@ -114,7 +121,12 @@ p, li {
 .routing_img,
 .handler_functions_img,
 .dynamic_routing_img,
-.middleware_output_img
+.middleware_output_img,
+.html_img,
+.dynamic_html_img,
+.lwt_img,
+.processing_request_img,
+.hello_dream_img
  {
   margin-bottom: 16px;
 }
